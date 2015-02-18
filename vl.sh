@@ -2,7 +2,7 @@
 
 if [ $# -eq 0 ];
 then 
-    echo "usage: vl [-t] filename(s)"
+    echo "usage: vl [-t] [FILENAME]..."
     exit
 fi
 
