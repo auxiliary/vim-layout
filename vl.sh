@@ -6,9 +6,12 @@ then
     exit
 fi
 
-if [ "$1" == "-t" ];
+if [ "$1" == "-t" ] || [ $# -ge 5 ];
 then
-    shift #remove the -t
+    if [ "$1" == "-t" ];
+    then
+        shift #remove the -t
+    fi
     main2files=$1;
     shift
     main2files=$main2files" "$1;
@@ -25,8 +28,11 @@ then
             vimcommand=$vimcommand" | tabe "$1;
         fi
         shift
-        vimcommand=$vimcommand" | vsplit "$1;
-        shift
+        if [ $1 ];
+        then
+            vimcommand=$vimcommand" | vsplit "$1;
+            shift
+        fi
     done
     vim -O -c "$vimcommand" $main2files
 else
