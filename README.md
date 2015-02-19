@@ -16,8 +16,7 @@ vim-layout can be used in different modes depending on the options or the number
 |                |                |  
 |                |                |
 |                |                |
-|                |                |
-|                |                |
+|     File 1     |     File 2     |
 |                |                |
 |                |                |
 |                |                |
@@ -28,13 +27,11 @@ vim-layout can be used in different modes depending on the options or the number
 ```
 +----------------+----------------+
 |                |                |
-|                |                |
-|                |                |
+|                |     File 3     |
 |                |                |
 |     File 1     +----------------+
 |                |                |
-|                |                |
-|                |                |
+|                |     File 2     |
 |                |                |
 +----------------+----------------+
 ```
@@ -44,13 +41,11 @@ vim-layout can be used in different modes depending on the options or the number
 ```
 +----------------+----------------+
 |                |                |
-|                |                |
-|                |                |
+|     File 3     |     File 4     |
 |                |                |
 +---------------------------------+
 |                |                |
-|                |                |
-|                |                |
+|     File 1     |     File 2     |
 |                |                |
 +----------------+----------------+
 ```
@@ -61,11 +56,7 @@ In this mode, every two files are splitted in separate tabs.
 
 ```
 +----+----+                        
-|    |    |                        
 +----+----+------+----------------+
-|                |                |
-|                |                |
-|                |                |
 |                |                |
 |                |                |
 |                |                |
@@ -80,13 +71,10 @@ In this mode, every two files are horizontally splitted in separate tabs.
 
 ```
 +----+----+                        
-|    |    |                        
 +----+----+-----------------------+
 |                                 |
 |                                 |
-|                                 |
 +---------------------------------+
-|                                 |
 |                                 |
 |                                 |
 +---------------------------------+
