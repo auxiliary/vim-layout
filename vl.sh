@@ -1,20 +1,49 @@
 #!/bin/bash
 
-if [ $# -eq 0 ];
+#Show help and exit
+if [ $# -eq 0 ] || [ $1 == "-h" ] || [ $1 == "--help" ];
 then 
-    echo "usage: vl [-t] [FILENAME]..."
+    echo "Usage: vl [OPTION] [FILE]..."
+    echo "Open vim for FILEs with automatic layouts."
+    echo "OPTION:"
+    echo -e "  -t, --tabbed  \t open 2 FILEs per tab, splitting each tab vertically"
+    echo -e "  -H, --htabbed \t open 2 FILEs per tab, splitting each tab horizontally"
+    echo -e "  -i, --install \t install this script"
+    echo -e "  -h, --help    \t display this help text and exit"
     exit
 fi
 
-if [ "$1" == "-t" ] || [ $# -ge 5 ];
-then
-    if [ "$1" == "-t" ];
-    then
-        shift #remove the -t
+#Install and exit
+if [ "$1" == "-i" ] || [ "$1" == "--install" ];
+then 
+    install -m 755 $BASH_SOURCE /usr/local/bin/vl
+    exit    
+fi
+
+tabbed_mode=false
+split_mode="vsplit"
+vimc_split_mode="-O"
+
+#If tabbed mode or the number of files is more than 5
+if [ "$1" == "-t" ] || [ "$1" == "--tabbed" ] || [ $1 == "-H" ] || [ $1 == "--htabbed" ] || [ $# -ge 5 ];
+then 
+    tabbed_mode=true
+    if [ $1 == "-H" ] || [ $1 == "--htabbed" ];
+    then 
+        split_mode="split"
+        vimc_split_mode="-o"
+        shift #remove the argument
+    elif [ $1 == "-t" ] || [ $1 == "--tabbed" ];
+    then 
+        shift #remove the argument
     fi
-    main2files=$1;
+fi
+
+if [ $tabbed_mode == true ];
+then
+    first2files=$1;
     shift
-    main2files=$main2files" "$1;
+    first2files=$first2files" "$1;
     shift
     vimcommand="";
     first_iteration=1
@@ -30,11 +59,12 @@ then
         shift
         if [ $1 ];
         then
-            vimcommand=$vimcommand" | vsplit "$1;
+            vimcommand=$vimcommand" | "$split_mode" "$1;
             shift
         fi
     done
-    vim -O -c "$vimcommand" $main2files
+    vim $(echo $vimc_split_mode) -c "$vimcommand" $first2files
+#Smart split
 else
     if [ $# -eq 4 ];
     then
@@ -50,3 +80,4 @@ else
         vim $1; 
     fi
 fi
+
