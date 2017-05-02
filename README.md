@@ -4,7 +4,7 @@ Opens multiple files in Vim with automatic layouts.
 
 Installation with Vundle/Pathogen
 ---
-Add `Plugin "git://github.com/auxiliary/vim-layout"` to your plugin list
+Add `Plugin "auxiliary/vim-layout"` to your plugin list
 
 Modes
 ---
