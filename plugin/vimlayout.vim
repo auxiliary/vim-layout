@@ -5,7 +5,7 @@ let empty_args = expand("##")
 if empty_args != ""
     argdelete *
     bufdo argadd %:p
-    let args = split(expand("##"))
+    let args = split(expand("##"), '\(\\\)\@<!\s')
     let counter = 0
     for i in args 
         if counter % 4 == 0
