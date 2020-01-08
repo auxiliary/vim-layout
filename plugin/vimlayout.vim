@@ -3,14 +3,15 @@
 """""""""""""""""""""""""""""""""""
 let empty_args = expand("##")
 if empty_args != ""
-    argdelete *
-    bufdo argadd %:p
     let args = split(expand("##"), '\(\\\)\@<!\s')
     let counter = 0
+    argdelete *
+    argadd %
     for i in args 
         if counter % 4 == 0
             if counter == 0
-                silent exe "edit" i
+                silent bnext
+                silent bprev
             else
                 silent exe "tabedit" i
             endif
